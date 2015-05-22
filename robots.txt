@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://hitodessit.github.io/sitemap.xml 
+Sitemap: http://android-dev.mobi/sitemap.xml 
