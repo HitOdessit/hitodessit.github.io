@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <title>Modern Android development for phones, tablets and wearables</title>
-  <meta name="author" content="KeyHit Studio">
+  <meta name="author" content="Android-Dev.mobi">
 
   
   <meta name="description" content="Problem statement: Assemble both mobile and wearable apps with the same RushORM database (.db file) with some predefined data in it, which will be &hellip;">
@@ -127,6 +127,71 @@
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/">[Realm] First Look Into Brand New Mobile Persistant Storage</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-04-30T17:32:55+03:00" pubdate data-updated="true">Apr 30th, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Starting new project we spent some time investigating new approaches for data persistant storage on Android Platform.</p>
+
+<p>One of the newest and the most promising library everybody is talking about is <a href="http://realm.io">Realm</a>.
+This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promise very handy and fast object-oriented access to local storage.</p>
+
+<p>What can be better that writing something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="n">realm</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+</span><span class='line'><span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">realm</span><span class="o">.</span><span class="na">createObject</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// Create a new object</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;John&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="s">&quot;john@corporation.com&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">realm</span><span class="o">.</span><span class="na">commitTransaction</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and store your business object into storage without any mapping, SQL, and other complicated and potentially slow operations inside?</p>
+
+<p>The first impression was - “wow, it’s awesome!”.
+It’s easy to integrate, pretty good documentation available, also samples, videos, community.</p>
+
+<p>But deeper dive showed shocking drawbacks: </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -151,6 +216,10 @@
         <a href="/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/">[RushORM] Using Predefined Database on Both Mobile and Wear Apps</a>
       </li>
     
+      <li class="post">
+        <a href="/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/">[Realm] First Look Into Brand New Mobile Persistant Storage</a>
+      </li>
+    
   </ul>
 </section>
 
@@ -165,7 +234,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - KeyHit Studio -
+  Copyright &copy; 2015 - Android-Dev.mobi -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

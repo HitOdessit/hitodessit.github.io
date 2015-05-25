@@ -4,10 +4,10 @@
   <title><![CDATA[Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-05-25T17:23:34+03:00</updated>
+  <updated>2015-05-25T18:08:12+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
-    <name><![CDATA[KeyHit Studio]]></name>
+    <name><![CDATA[Android-Dev.mobi]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -146,6 +146,52 @@ RushORM store files in <code>/data/data/&lt;yourAppID&gt;/databases/</code> dire
 <p>After that is done, we can initialize RushORM with <code>predefined.db</code> file.</p>
 
 <p>PS: Theoretically, it could be possible to run <code>db-generator</code> on desktop, but we didn’t try this approach. If you have some information about launching RushORM on desktop, please share it with us in comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Realm] First Look Into Brand New Mobile Persistant Storage]]></title>
+    <link href="http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/"/>
+    <updated>2015-04-30T17:32:55+03:00</updated>
+    <id>http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage</id>
+    <content type="html"><![CDATA[<p>Starting new project we spent some time investigating new approaches for data persistant storage on Android Platform.</p>
+
+<p>One of the newest and the most promising library everybody is talking about is <a href="http://realm.io">Realm</a>.
+This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promise very handy and fast object-oriented access to local storage.</p>
+
+<p>What can be better that writing something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="n">realm</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+</span><span class='line'><span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">realm</span><span class="o">.</span><span class="na">createObject</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// Create a new object</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;John&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="s">&quot;john@corporation.com&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">realm</span><span class="o">.</span><span class="na">commitTransaction</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and store your business object into storage without any mapping, SQL, and other complicated and potentially slow operations inside?</p>
+
+<p>The first impression was - “wow, it’s awesome!”.
+It’s easy to integrate, pretty good documentation available, also samples, videos, community.</p>
+
+<p>But deeper dive showed shocking drawbacks: <!--more--></p>
+
+<ul>
+<li>you can store only “absolutely pure realm objects”, which means no inheritance from other class, no hierarchy  of your business classes, even no other methods except getters and setters are allowed.</li>
+<li>you can’t override methods like <code>toString()</code> and <code>equals()</code></li>
+<li>you can access your data fields only by getters and/or setters which makes impossible to serialize data objects to JSON by vell known libraries like <a href="https://code.google.com/p/google-gson/">GSON</a> cause they uses direct field access for it, instead of getters/setters.</li>
+<li>no built-in mechanism to export/import data using JSON, only import functionality available (<a href="http://realm.io/docs/java/latest/#json">http://realm.io/docs/java/latest/#json</a>), but it’s absolutely unclear how to import objects with many-to-many relationship to each other.</li>
+</ul>
+
+
+<p>It’s too much for us. As we need to export/import data from local storage intensively this solution is unacceptable for us.</p>
+
+<p>We will keep our eyes on Realm project progress, but now we&rsquo;re going to try other solutions.</p>
 ]]></content>
   </entry>
   

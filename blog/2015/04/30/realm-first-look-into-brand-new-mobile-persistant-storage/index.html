@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[Realm] First Look Into Brand New Mobile Persistant Storage - Modern Android development for phones, tablets and wearables</title>
+  <meta name="author" content="Android-Dev.mobi">
+
+  
+  <meta name="description" content="Starting new project we spent some time investigating new approaches for data persistant storage on Android Platform. One of the newest and the most &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Modern Android development for phones, tablets and wearables" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-63303522-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Modern Android development for phones, tablets and wearables</a></h1>
+  
+    <h2>Personal blog of a small team of Android engineers who believe that Android development should be very simple, fast and reliable.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  
+  
+</ul>
+
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[Realm] First Look Into Brand New Mobile Persistant Storage</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-04-30T17:32:55+03:00" pubdate data-updated="true">Apr 30th, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Starting new project we spent some time investigating new approaches for data persistant storage on Android Platform.</p>
+
+<p>One of the newest and the most promising library everybody is talking about is <a href="http://realm.io">Realm</a>.
+This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promise very handy and fast object-oriented access to local storage.</p>
+
+<p>What can be better that writing something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="n">realm</span><span class="o">.</span><span class="na">beginTransaction</span><span class="o">();</span>
+</span><span class='line'><span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">realm</span><span class="o">.</span><span class="na">createObject</span><span class="o">(</span><span class="n">User</span><span class="o">.</span><span class="na">class</span><span class="o">);</span> <span class="c1">// Create a new object</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;John&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="s">&quot;john@corporation.com&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">realm</span><span class="o">.</span><span class="na">commitTransaction</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and store your business object into storage without any mapping, SQL, and other complicated and potentially slow operations inside?</p>
+
+<p>The first impression was - “wow, it’s awesome!”.
+It’s easy to integrate, pretty good documentation available, also samples, videos, community.</p>
+
+<p>But deeper dive showed shocking drawbacks: <!--more--></p>
+
+<ul>
+<li>you can store only “absolutely pure realm objects”, which means no inheritance from other class, no hierarchy  of your business classes, even no other methods except getters and setters are allowed.</li>
+<li>you can’t override methods like <code>toString()</code> and <code>equals()</code></li>
+<li>you can access your data fields only by getters and/or setters which makes impossible to serialize data objects to JSON by vell known libraries like <a href="https://code.google.com/p/google-gson/">GSON</a> cause they uses direct field access for it, instead of getters/setters.</li>
+<li>no built-in mechanism to export/import data using JSON, only import functionality available (<a href="http://realm.io/docs/java/latest/#json">http://realm.io/docs/java/latest/#json</a>), but it’s absolutely unclear how to import objects with many-to-many relationship to each other.</li>
+</ul>
+
+
+<p>It’s too much for us. As we need to export/import data from local storage intensively this solution is unacceptable for us.</p>
+
+<p>We will keep our eyes on Realm project progress, but now we&rsquo;re going to try other solutions.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Android-Dev.mobi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-04-30T17:32:55+03:00" pubdate data-updated="true">Apr 30th, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/database/'>database</a>, <a class='category' href='/blog/categories/mobile/'>mobile</a>, <a class='category' href='/blog/categories/realm/'>realm</a>, <a class='category' href='/blog/categories/wear/'>wear</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/" data-via="" data-counturl="http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/" title="Next Post: [RushORM] Using predefined database on both Mobile and Wear apps">[RushORM] Using predefined database on both Mobile and Wear apps &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+  <aside class="sidebar">
+   
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-dev.mobi" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/">[RushORM] Using Predefined Database on Both Mobile and Wear Apps</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/">[Realm] First Look Into Brand New Mobile Persistant Storage</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Android-Dev.mobi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script>
+  $(document).ready(function() {  
+    var stickyNavTop = $('nav').offset().top;  
+      
+    var stickyNav = function(){  
+      var scrollTop = $(window).scrollTop(); 
+      var navHasClassSticky = $('nav').hasClass('sticky');
+
+      if (scrollTop > stickyNavTop && navHasClassSticky) {   
+        return true;
+      } else if (scrollTop > stickyNavTop) {
+        $('nav').hide();
+        $('nav').addClass('sticky');
+        $('nav').fadeIn('2000');
+      } else {  
+        $('nav').removeClass('sticky');   
+      }  
+    };  
+      
+    stickyNav();  
+      
+    $(window).scroll(function() {  
+      stickyNav();  
+    });  
+  });  
+</script>
+
+
+</body>
+</html>

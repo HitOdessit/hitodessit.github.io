@@ -5,6 +5,10 @@
     <lastmod>2015-05-17T16:31:37+03:00</lastmod>
   </url>
   <url>
+    <loc>http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/</loc>
+    <lastmod>2015-04-30T17:32:55+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://android-dev.mobi/blog/archives/</loc>
   </url>
   <url>
@@ -14,7 +18,7 @@
     <loc>http://android-dev.mobi/blog/categories/database/</loc>
   </url>
   <url>
-    <loc>http://android-dev.mobi/blog/categories/rushorm/</loc>
+    <loc>http://android-dev.mobi/blog/categories/realm/</loc>
   </url>
   <url>
     <loc>http://android-dev.mobi/blog/categories/android/</loc>
@@ -24,5 +28,8 @@
   </url>
   <url>
     <loc>http://android-dev.mobi/blog/categories/mobile/</loc>
+  </url>
+  <url>
+    <loc>http://android-dev.mobi/blog/categories/rushorm/</loc>
   </url>
 </urlset>

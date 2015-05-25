@@ -4,10 +4,10 @@
   <title><![CDATA[Category: Mobile | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/mobile/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-05-25T17:23:34+03:00</updated>
+  <updated>2015-05-25T18:08:12+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
-    <name><![CDATA[KeyHit Studio]]></name>
+    <name><![CDATA[Android-Dev.mobi]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -101,6 +101,46 @@ private static void copyFile(Context context, String name) throws IOException {
 <p>After that is done, we can initialize RushORM with <code>predefined.db</code> file.</p>
 
 <p>PS: Theoretically, it could be possible to run <code>db-generator</code> on desktop, but we didn’t try this approach. If you have some information about launching RushORM on desktop, please share it with us in comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Realm] First Look Into Brand New Mobile Persistant Storage]]></title>
+    <link href="http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/"/>
+    <updated>2015-04-30T17:32:55+03:00</updated>
+    <id>http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage</id>
+    <content type="html"><![CDATA[<p>Starting new project we spent some time investigating new approaches for data persistant storage on Android Platform.</p>
+
+<p>One of the newest and the most promising library everybody is talking about is <a href="http://realm.io">Realm</a>.
+This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promise very handy and fast object-oriented access to local storage.</p>
+
+<p>What can be better that writing something like:</p>
+
+<pre><code class="Java">realm.beginTransaction();
+User user = realm.createObject(User.class); // Create a new object
+user.setName("John");
+user.setEmail("john@corporation.com");
+realm.commitTransaction();
+</code></pre>
+
+<p>and store your business object into storage without any mapping, SQL, and other complicated and potentially slow operations inside?</p>
+
+<p>The first impression was - “wow, it’s awesome!”.
+It’s easy to integrate, pretty good documentation available, also samples, videos, community.</p>
+
+<p>But deeper dive showed shocking drawbacks: <!--more--></p>
+
+<ul>
+<li>you can store only “absolutely pure realm objects”, which means no inheritance from other class, no hierarchy  of your business classes, even no other methods except getters and setters are allowed.</li>
+<li>you can’t override methods like <code>toString()</code> and <code>equals()</code></li>
+<li>you can access your data fields only by getters and/or setters which makes impossible to serialize data objects to JSON by vell known libraries like <a href="https://code.google.com/p/google-gson/">GSON</a> cause they uses direct field access for it, instead of getters/setters.</li>
+<li>no built-in mechanism to export/import data using JSON, only import functionality available (<a href="http://realm.io/docs/java/latest/#json">http://realm.io/docs/java/latest/#json</a>), but it’s absolutely unclear how to import objects with many-to-many relationship to each other.</li>
+</ul>
+
+
+<p>It’s too much for us. As we need to export/import data from local storage intensively this solution is unacceptable for us.</p>
+
+<p>We will keep our eyes on Realm project progress, but now we&rsquo;re going to try other solutions.</p>
 ]]></content>
   </entry>
   
