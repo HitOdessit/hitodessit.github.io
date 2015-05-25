@@ -2,12 +2,12 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://hitodessit.github.io
-title: Jiggy!
-subtitle: Be "Jiggy" in Android and Android Wear development by reading this blog!
-author: Valery
+url: http://android-dev.mobi
+title: Modern Android development for phones, tablets and wearables
+subtitle: Personal blog of a small team of Android engineers who believe that Android development should be very simple, fast and reliable.
+author: KeyHit Studio
 simple_search: https://www.google.com/search
-description:
+description: 
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -96,7 +96,7 @@ disqus_short_name:
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-63303522-1
 
 # Facebook Like
-facebook_like: false
+facebook_like: true
