@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-05-25T17:21:41+03:00</updated>
+  <updated>2015-05-25T17:23:34+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[KeyHit Studio]]></name>
@@ -34,7 +34,7 @@
 </ul>
 
 
-<p>We didn’t want to have any of the above dependencies and drawbacks in our app, so we come up with another solution - <strong>generate database</strong> (<code>.db</code> file) with all <strong>predefined data</strong> preliminary and assemble both mobile and wearable apps with the same <code>.db</code> file. Similar feature existed in <a href="https://github.com/pardom/ActiveAndroid/wiki/Pre-populated-databases">ActiveAndroid ORM</a> framework and it’s called <strong>Pre-populated databases</strong>. However, <a href="http://www.rushorm.com/advanced.html">RushORM</a> doesn’t have such feature. So, we decided to implement that feature by ourselves.</p>
+<p>We didn’t want to have any of the above dependencies and drawbacks in our app, so we come up with another solution: <!--more--> <strong>generate database</strong> (<code>.db</code> file) with all <strong>predefined data</strong> preliminary and assemble both mobile and wearable apps with the same <code>.db</code> file. Similar feature existed in <a href="https://github.com/pardom/ActiveAndroid/wiki/Pre-populated-databases">ActiveAndroid ORM</a> framework and it’s called <strong>Pre-populated databases</strong>. However, <a href="http://www.rushorm.com/advanced.html">RushORM</a> doesn’t have such feature. So, we decided to implement that feature by ourselves.</p>
 
 <p>There are 2 parts of the above task:</p>
 
