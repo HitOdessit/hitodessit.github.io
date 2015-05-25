@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://android-dev.mobi/blog/2015/04/27/hello-world/</loc>
-    <lastmod>2015-04-27T19:54:33+03:00</lastmod>
+    <loc>http://android-dev.mobi/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/</loc>
+    <lastmod>2015-05-17T16:31:37+03:00</lastmod>
   </url>
   <url>
     <loc>http://android-dev.mobi/blog/archives/</loc>
   </url>
   <url>
     <loc>http://android-dev.mobi/</loc>
+  </url>
+  <url>
+    <loc>http://android-dev.mobi/blog/categories/database/</loc>
+  </url>
+  <url>
+    <loc>http://android-dev.mobi/blog/categories/rushorm/</loc>
+  </url>
+  <url>
+    <loc>http://android-dev.mobi/blog/categories/android/</loc>
+  </url>
+  <url>
+    <loc>http://android-dev.mobi/blog/categories/wear/</loc>
+  </url>
+  <url>
+    <loc>http://android-dev.mobi/blog/categories/mobile/</loc>
   </url>
 </urlset>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mobile | Modern Android development for phones, tablets and wearables]]></title>
+  <link href="http://android-dev.mobi/blog/categories/mobile/atom.xml" rel="self"/>
+  <link href="http://android-dev.mobi/"/>
+  <updated>2015-05-25T17:21:41+03:00</updated>
+  <id>http://android-dev.mobi/</id>
+  <author>
+    <name><![CDATA[KeyHit Studio]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[RushORM] Using Predefined Database on Both Mobile and Wear Apps]]></title>
+    <link href="http://android-dev.mobi/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/"/>
+    <updated>2015-05-17T16:31:37+03:00</updated>
+    <id>http://android-dev.mobi/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps</id>
+    <content type="html"><![CDATA[<p>Problem statement:</p>
+
+<blockquote><p>Assemble both mobile and wearable apps with the same RushORM database (.db file) with some predefined data in it, which will be absolutely the same for mobile and wear apps.</p></blockquote>
+
+<p>While developing one of our apps, we were needed to ship both mobile and wear apps with the same set of “predefined” (pre-populated) data. However, user should be able to modify this data, add new or delete existed.</p>
+
+<p>Using Android’s Framework <code>res</code> folder seems like not an option, because we can’t modify it’s content at runtime. Another idea is to upload that “predefined” data to some server, lets say in JSON format, download it during first app launch and store it in RushORM database using <code>RushCore.getInstance().deserialize(jsonString)</code> API. This may seems like a nice option, but it introduces few dependencies which we don’t want to have in our apps, like:</p>
+
+<ul>
+<li>Internet connection is required during first app start.</li>
+<li>Downloading, parsing and storing data into database increase first startup time, therefore worsens user experience.</li>
+<li>Some server is required, however it could be simply Dropbox with publicly shared files.</li>
+<li>Some script is required to upload generated files to remote server, and also to download these files from server to Android device.</li>
+</ul>
+
+
+<p>We didn’t want to have any of the above dependencies and drawbacks in our app, so we come up with another solution - <strong>generate database</strong> (<code>.db</code> file) with all <strong>predefined data</strong> preliminary and assemble both mobile and wearable apps with the same <code>.db</code> file. Similar feature existed in <a href="https://github.com/pardom/ActiveAndroid/wiki/Pre-populated-databases">ActiveAndroid ORM</a> framework and it’s called <strong>Pre-populated databases</strong>. However, <a href="http://www.rushorm.com/advanced.html">RushORM</a> doesn’t have such feature. So, we decided to implement that feature by ourselves.</p>
+
+<p>There are 2 parts of the above task:</p>
+
+<ul>
+<li>Generate correct <code>.db</code> file in RushORM format with all data that we need in our apps initially.</li>
+<li>Use that pre-populated <code>.db</code> file to initialize RushORM both on Mobile and Wear apps.</li>
+</ul>
+
+
+<p>To implement first part, we’ve created separate module in our Android project called <code>db-generator</code>. It’s a separate mobile app, which is very simple - just initialize empty RushORM database and then run data generation process, which saves generated data (business objects in our case) into DB, synchronously, using methods like <code>RushCore.getInstance().save(List&lt;? extends Rush&gt; objects)</code>.
+RushORM store files in <code>/data/data/&lt;yourAppID&gt;/databases/</code> directory. After database was generated, we need to get it from rooted Android device or Android emulator where you were running <code>db-generator</code>. We can pull files using <code>adb pull</code> command. To make this process automated, we’ve created simple <code>Makefile</code>:</p>
+
+<pre><code class="make">THIS_FILE := $(lastword $(MAKEFILE_LIST))
+
+db:
+adb uninstall &lt;yourAppID&gt;
+./gradlew db-generator:installDebug
+adb shell am start -n &lt;yourAppID&gt;/.DBGeneratorActivity
+sleep 5
+adb pull /data/data/&lt;yourAppID&gt;/databases/predefined.db ./common/src/main/assets/predefined.db
+@echo "\nBuild successful.\n"
+</code></pre>
+
+<p>Here we’re uninstalling our app first (to clear any previsouly stored data), then running standard Gradle task to install debug build of <code>db-generator</code> app, starting <code>DBGeneratorActivity</code> and waiting few seconds to allow data to be generated and stored into local storage. After that we’re pulling <code>.db</code> file using <code>adb pull</code> command (Note: this will only work on emulators or rooted devices) and storing it in our <code>common</code> module <code>assets</code> folder.</p>
+
+<p>To implement second part, we need to copy <code>.db</code> file from <code>assets</code> folder to app sandbox folder (because files in <code>assets</code> folder are read-only) and only after that initialize RushORM. We need to do this only once, during app first launch. Here is the code:</p>
+
+<pre><code class="Java">public static void copyPredefinedDBIfNeeded(Context context) {
+    boolean isProcessed = targetDBFile(context, PREDEFINED_DB_FILENAME).exists();
+    if (isProcessed) {
+        LOG.i("Predefined DB is already processed, skipping");
+        return;
+    }
+    try {
+        copyFile(context, PREDEFINED_DB_FILENAME);
+        LOG.i("Predefined DB files are copied");
+    } catch (IOException e) {
+        LOG.e("Can't copy predefined db file", e);
+    }
+}
+
+private static File targetDBFile(Context context, String name) {
+    return context.getDatabasePath(name);
+}
+
+private static void copyFile(Context context, String name) throws IOException {
+    InputStream in = null;
+    File outFile = targetDBFile(context, name);
+    try {
+        in = context.getAssets().open(name);
+        FileUtils.copyInputStreamToFile(in, outFile);
+    } finally {
+        if (in != null) {
+            //noinspection EmptyCatchBlock
+            try {
+                in.close();
+            } catch (IOException e) {
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>After that is done, we can initialize RushORM with <code>predefined.db</code> file.</p>
+
+<p>PS: Theoretically, it could be possible to run <code>db-generator</code> on desktop, but we didn’t try this approach. If you have some information about launching RushORM on desktop, please share it with us in comments.</p>
+]]></content>
+  </entry>
+  
+</feed>

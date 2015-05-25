@@ -4,7 +4,7 @@
   <title><![CDATA[Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-05-25T16:18:33+03:00</updated>
+  <updated>2015-05-25T17:21:41+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[KeyHit Studio]]></name>
@@ -14,40 +14,38 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hello, World!]]></title>
-    <link href="http://android-dev.mobi/blog/2015/04/27/hello-world/"/>
-    <updated>2015-04-27T19:54:33+03:00</updated>
-    <id>http://android-dev.mobi/blog/2015/04/27/hello-world</id>
-    <content type="html"><![CDATA[<p>This is my first post in this blog and in general my first blogging experience. Please do not judge strictly :)</p>
+    <title type="html"><![CDATA[[RushORM] Using Predefined Database on Both Mobile and Wear Apps]]></title>
+    <link href="http://android-dev.mobi/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/"/>
+    <updated>2015-05-17T16:31:37+03:00</updated>
+    <id>http://android-dev.mobi/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps</id>
+    <content type="html"><![CDATA[<p>Problem statement:</p>
 
-<p>more content</p>
+<blockquote><p>Assemble both mobile and wearable apps with the same RushORM database (.db file) with some predefined data in it, which will be absolutely the same for mobile and wear apps.</p></blockquote>
 
-<ol>
-<li>one</li>
-<li>two</li>
-<li>three</li>
-</ol>
+<p>While developing one of our apps, we were needed to ship both mobile and wear apps with the same set of “predefined” (pre-populated) data. However, user should be able to modify this data, add new or delete existed.</p>
+
+<p>Using Android’s Framework <code>res</code> folder seems like not an option, because we can’t modify it’s content at runtime. Another idea is to upload that “predefined” data to some server, lets say in JSON format, download it during first app launch and store it in RushORM database using <code>RushCore.getInstance().deserialize(jsonString)</code> API. This may seems like a nice option, but it introduces few dependencies which we don’t want to have in our apps, like:</p>
+
+<ul>
+<li>Internet connection is required during first app start.</li>
+<li>Downloading, parsing and storing data into database increase first startup time, therefore worsens user experience.</li>
+<li>Some server is required, however it could be simply Dropbox with publicly shared files.</li>
+<li>Some script is required to upload generated files to remote server, and also to download these files from server to Android device.</li>
+</ul>
 
 
-<h2>h2</h2>
+<p>We didn’t want to have any of the above dependencies and drawbacks in our app, so we come up with another solution - <strong>generate database</strong> (<code>.db</code> file) with all <strong>predefined data</strong> preliminary and assemble both mobile and wearable apps with the same <code>.db</code> file. Similar feature existed in <a href="https://github.com/pardom/ActiveAndroid/wiki/Pre-populated-databases">ActiveAndroid ORM</a> framework and it’s called <strong>Pre-populated databases</strong>. However, <a href="http://www.rushorm.com/advanced.html">RushORM</a> doesn’t have such feature. So, we decided to implement that feature by ourselves.</p>
 
-<h3>h3</h3>
+<p>There are 2 parts of the above task:</p>
 
-<h4>h4</h4>
+<ul>
+<li>Generate correct <code>.db</code> file in RushORM format with all data that we need in our apps initially.</li>
+<li>Use that pre-populated <code>.db</code> file to initialize RushORM both on Mobile and Wear apps.</li>
+</ul>
 
-<blockquote><p>quote 1</p>
 
-<blockquote><p>quote 2</p></blockquote></blockquote>
-
-<p>h first</p>
-
-<hr />
-
-<p>h second</p>
-
-<hr />
-
-<p>Now, some Java code:</p>
+<p>To implement first part, we’ve created separate module in our Android project called <code>db-generator</code>. It’s a separate mobile app, which is very simple - just initialize empty RushORM database and then run data generation process, which saves generated data (business objects in our case) into DB, synchronously, using methods like <code>RushCore.getInstance().save(List&lt;? extends Rush&gt; objects)</code>.
+RushORM store files in <code>/data/data/&lt;yourAppID&gt;/databases/</code> directory. After database was generated, we need to get it from rooted Android device or Android emulator where you were running <code>db-generator</code>. We can pull files using <code>adb pull</code> command. To make this process automated, we’ve created simple <code>Makefile</code>:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -58,19 +56,21 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">serializeRoutine</span><span class="o">(</span><span class="n">Routine</span> <span class="n">obj</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JSONException</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-</span><span class='line'>        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">,</span> <span class="n">obj</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
-</span><span class='line'>        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;name&quot;</span><span class="o">,</span> <span class="n">obj</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
-</span><span class='line'>        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;synced&quot;</span><span class="o">,</span> <span class="n">obj</span><span class="o">.</span><span class="na">isSynced</span><span class="o">());</span>
-</span><span class='line'>        <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;entries&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nf">JSONArray</span><span class="o">(</span><span class="n">obj</span><span class="o">.</span><span class="na">getEntries</span><span class="o">()));</span>
+</pre></td><td class='code'><pre><code class='make'><span class='line'><span class="nv">THIS_FILE</span> <span class="o">:=</span> <span class="k">$(</span>lastword <span class="k">$(</span>MAKEFILE_LIST<span class="k">))</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="k">new</span> <span class="nf">JSONObject</span><span class="o">(</span><span class="n">map</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="nf">db</span><span class="o">:</span>
+</span><span class='line'><span class="err">adb</span> <span class="err">uninstall</span> <span class="err">&lt;yourAppID&gt;</span>
+</span><span class='line'><span class="nf">./gradlew db-generator</span><span class="o">:</span><span class="n">installDebug</span>
+</span><span class='line'><span class="err">adb</span> <span class="err">shell</span> <span class="err">am</span> <span class="err">start</span> <span class="err">-n</span> <span class="err">&lt;yourAppID&gt;/.DBGeneratorActivity</span>
+</span><span class='line'><span class="err">sleep</span> <span class="err">5</span>
+</span><span class='line'><span class="err">adb</span> <span class="err">pull</span> <span class="err">/data/data/&lt;yourAppID&gt;/databases/predefined.db</span> <span class="err">./common/src/main/assets/predefined.db</span>
+</span><span class='line'><span class="err">@echo</span> <span class="s2">&quot;\nBuild successful.\n&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>And some XML code</p>
+<p>Here we’re uninstalling our app first (to clear any previsouly stored data), then running standard Gradle task to install debug build of <code>db-generator</code> app, starting <code>DBGeneratorActivity</code> and waiting few seconds to allow data to be generated and stored into local storage. After that we’re pulling <code>.db</code> file using <code>adb pull</code> command (Note: this will only work on emulators or rooted devices) and storing it in our <code>common</code> module <code>assets</code> folder.</p>
+
+<p>To implement second part, we need to copy <code>.db</code> file from <code>assets</code> folder to app sandbox folder (because files in <code>assets</code> folder are read-only) and only after that initialize RushORM. We need to do this only once, during app first launch. Here is the code:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -106,48 +106,46 @@
 <span class='line-number'>32</span>
 <span class='line-number'>33</span>
 <span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='XML'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
-</span><span class='line'>    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span>
-</span><span class='line'>    <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-</span><span class='line'>    <span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
-</span><span class='line'>    <span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span>
-</span><span class='line'>    <span class="na">tools:context=</span><span class="s">&quot;.MainActivity&quot;</span>
-</span><span class='line'>    <span class="na">tools:deviceIds=</span><span class="s">&quot;wear_square&quot;</span><span class="nt">&gt;</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">copyPredefinedDBIfNeeded</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kt">boolean</span> <span class="n">isProcessed</span> <span class="o">=</span> <span class="n">targetDBFile</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">PREDEFINED_DB_FILENAME</span><span class="o">).</span><span class="na">exists</span><span class="o">();</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">isProcessed</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">LOG</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">&quot;Predefined DB is already processed, skipping&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">return</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">copyFile</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">PREDEFINED_DB_FILENAME</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">LOG</span><span class="o">.</span><span class="na">i</span><span class="o">(</span><span class="s">&quot;Predefined DB files are copied&quot;</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">LOG</span><span class="o">.</span><span class="na">e</span><span class="o">(</span><span class="s">&quot;Can&#39;t copy predefined db file&quot;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;ScrollView</span>
-</span><span class='line'>        <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-</span><span class='line'>        <span class="na">android:layout_height=</span><span class="s">&quot;0dp&quot;</span>
-</span><span class='line'>        <span class="na">android:layout_weight=</span><span class="s">&quot;1&quot;</span>
-</span><span class='line'>        <span class="na">android:scrollbars=</span><span class="s">&quot;vertical&quot;</span>
-</span><span class='line'>        <span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;TextView</span>
-</span><span class='line'>                <span class="na">android:id=</span><span class="s">&quot;@+id/txObjectsLog&quot;</span>
-</span><span class='line'>                <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-</span><span class='line'>                <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
-</span><span class='line'>                <span class="na">android:singleLine=</span><span class="s">&quot;false&quot;</span>
-</span><span class='line'>                <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/ScrollView&gt;</span>
+</span><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="n">File</span> <span class="nf">targetDBFile</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="na">getDatabasePath</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+</span><span class='line'><span class="o">}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;Button</span>
-</span><span class='line'>  <span class="na">android:id=</span><span class="s">&quot;@+id/btnPost&quot;</span>
-</span><span class='line'>        <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-</span><span class='line'>        <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
-</span><span class='line'>        <span class="na">android:text=</span><span class="s">&quot;@string/post_stub_data&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;Button</span>
-</span><span class='line'>        <span class="na">android:id=</span><span class="s">&quot;@+id/btnStartWorkout&quot;</span>
-</span><span class='line'>        <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
-</span><span class='line'>        <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
-</span><span class='line'>        <span class="na">android:text=</span><span class="s">&quot;@string/start_workout&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/LinearLayout&gt;</span>
+</span><span class='line'><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">copyFile</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>    <span class="n">File</span> <span class="n">outFile</span> <span class="o">=</span> <span class="n">targetDBFile</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">name</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">in</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getAssets</span><span class="o">().</span><span class="na">open</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">FileUtils</span><span class="o">.</span><span class="na">copyInputStreamToFile</span><span class="o">(</span><span class="n">in</span><span class="o">,</span> <span class="n">outFile</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">in</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="c1">//noinspection EmptyCatchBlock</span>
+</span><span class='line'>            <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>end.</p>
+<p>After that is done, we can initialize RushORM with <code>predefined.db</code> file.</p>
+
+<p>PS: Theoretically, it could be possible to run <code>db-generator</code> on desktop, but we didn’t try this approach. If you have some information about launching RushORM on desktop, please share it with us in comments.</p>
 ]]></content>
   </entry>
   
