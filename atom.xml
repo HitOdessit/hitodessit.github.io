@@ -4,7 +4,7 @@
   <title><![CDATA[Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-05-26T13:05:24+03:00</updated>
+  <updated>2015-05-26T13:08:46+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[Android-Dev.mobi]]></name>
@@ -181,7 +181,7 @@ like:</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Do not abuse this option, because it may drain battery of users wearables!</strong></p>
+<p><strong>Do not abuse this option, because it may drain wearable device’s battery!</strong></p>
 ]]></content>
   </entry>
   
