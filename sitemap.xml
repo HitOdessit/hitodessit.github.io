@@ -5,6 +5,10 @@
     <lastmod>2015-05-17T16:31:37+03:00</lastmod>
   </url>
   <url>
+    <loc>http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/</loc>
+    <lastmod>2015-05-06T12:57:34+03:00</lastmod>
+  </url>
+  <url>
     <loc>http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/</loc>
     <lastmod>2015-04-30T17:32:55+03:00</lastmod>
   </url>
@@ -28,6 +32,9 @@
   </url>
   <url>
     <loc>http://android-dev.mobi/blog/categories/mobile/</loc>
+  </url>
+  <url>
+    <loc>http://android-dev.mobi/blog/categories/ui/</loc>
   </url>
   <url>
     <loc>http://android-dev.mobi/blog/categories/rushorm/</loc>

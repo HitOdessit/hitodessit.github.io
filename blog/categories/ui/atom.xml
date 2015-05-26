@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ui | Modern Android development for phones, tablets and wearables]]></title>
+  <link href="http://android-dev.mobi/blog/categories/ui/atom.xml" rel="self"/>
+  <link href="http://android-dev.mobi/"/>
+  <updated>2015-05-26T13:05:24+03:00</updated>
+  <id>http://android-dev.mobi/</id>
+  <author>
+    <name><![CDATA[Android-Dev.mobi]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[Wear] Avoid System Timeout to Close the Activity]]></title>
+    <link href="http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/"/>
+    <updated>2015-05-06T12:57:34+03:00</updated>
+    <id>http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity</id>
+    <content type="html"><![CDATA[<p>Interestingly, by default Android Wear close the application activity after 30 seconds of idle.
+It means that Google wants Wear apps be “lightweight” -  designed to work in short-time interaction with user.</p>
+
+<p>But still Android is Android :) Here you can avoid almost everything.</p>
+
+<p>Just add <code>android:keepScreenOn="true"</code> to your activities root view XML and timeout will be dismissed.</p>
+
+<p>Alternatively, you can <a href="https://developer.android.com/training/scheduling/wakelock.html#screen">set same flag at runtime from Java code</a>
+like:</p>
+
+<pre><code class="Java">public class MainActivity extends Activity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+</code></pre>
+
+<p><strong>Do not abuse this option, because it may drain battery of users wearables!</strong></p>
+]]></content>
+  </entry>
+  
+</feed>

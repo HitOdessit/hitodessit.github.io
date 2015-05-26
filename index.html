@@ -135,6 +135,73 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/">[Wear] Avoid System Timeout to Close the Activity</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-05-06T12:57:34+03:00" pubdate data-updated="true">May 6th, 2015</time>
+        
+           | <a href="/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/#disqus_thread"
+             data-disqus-identifier="http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Interestingly, by default Android Wear close the application activity after 30 seconds of idle.
+It means that Google wants Wear apps be “lightweight” -  designed to work in short-time interaction with user.</p>
+
+<p>But still Android is Android :) Here you can avoid almost everything.</p>
+
+<p>Just add <code>android:keepScreenOn="true"</code> to your activities root view XML and timeout will be dismissed.</p>
+
+<p>Alternatively, you can <a href="https://developer.android.com/training/scheduling/wakelock.html#screen">set same flag at runtime from Java code</a>
+like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">getWindow</span><span class="o">().</span><span class="na">addFlags</span><span class="o">(</span><span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_KEEP_SCREEN_ON</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Do not abuse this option, because it may drain battery of users wearables!</strong></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/">[Realm] First Look Into Brand New Mobile Persistant Storage</a></h1>
     
     
@@ -220,6 +287,10 @@ It’s easy to integrate, pretty good documentation available, also samples, vid
     
       <li class="post">
         <a href="/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/">[RushORM] Using Predefined Database on Both Mobile and Wear Apps</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/">[Wear] Avoid System Timeout to Close the Activity</a>
       </li>
     
       <li class="post">
