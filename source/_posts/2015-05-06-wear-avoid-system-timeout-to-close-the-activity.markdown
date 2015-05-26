@@ -26,5 +26,5 @@ public class MainActivity extends Activity {
     }
 ```
 
-**Do not abuse this option, because it may drain battery of users wearables!**
+**Do not abuse this option, because it may drain wearable device’s battery!**
 
