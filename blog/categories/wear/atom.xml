@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Wear | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/wear/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-05-28T09:07:43+03:00</updated>
+  <updated>2015-05-28T09:09:34+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[Android-Dev.mobi]]></name>
@@ -134,9 +134,9 @@ like:</p>
   
   <entry>
     <title type="html"><![CDATA[[Realm] First Look Into Brand New Mobile Persistent Storage]]></title>
-    <link href="http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage/"/>
+    <link href="http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistent-storage/"/>
     <updated>2015-04-30T17:32:55+03:00</updated>
-    <id>http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistant-storage</id>
+    <id>http://android-dev.mobi/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistent-storage</id>
     <content type="html"><![CDATA[<p>Starting new project we spent some time investigating new approaches for data persistent storage on Android Platform.</p>
 
 <p>One of the newest and the most promising library everybody is talking about is <a href="http://realm.io">Realm</a>.
