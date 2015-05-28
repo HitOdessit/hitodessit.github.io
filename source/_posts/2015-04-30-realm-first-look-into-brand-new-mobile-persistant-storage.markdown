@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "[Realm] First look into brand new Mobile persistant storage"
+title: "[Realm] First look into brand new Mobile persistent storage"
 date: 2015-04-30 17:32:55 +0300
 comments: true
 categories: [Database, Realm, Android, Wear, Mobile]
 ---
 
-Starting new project we spent some time investigating new approaches for data persistant storage on Android Platform.
+Starting new project we spent some time investigating new approaches for data persistent storage on Android Platform.
 
 One of the newest and the most promising library everybody is talking about is [Realm](http://realm.io).
 This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promise very handy and fast object-oriented access to local storage.
