@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Presentations | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/presentations/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-06-16T17:01:16+03:00</updated>
+  <updated>2015-06-16T17:02:04+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[Android-Dev.mobi]]></name>
@@ -23,6 +23,11 @@
 <p>Talk itself is very interesting, and I would agree with Kevlin on most of his points. Among other things, author talks about efficiency of source code reading, clean code without much noise, signal-to-noise ratio, etc. Interestingly, talk itself took more than one hour, which could be interpreted as noisy itself :) In a modern world for many people it’s quite difficult to allocate more than 1 hour in a row to watch such presentation.</p>
 
 <p>So, we’ve decided to write a short summary for the above talk, to help people to quickly go through the main points of the above talk.</p>
+
+<!--more-->
+
+
+
 
 <p><ol>
 <li></p>
