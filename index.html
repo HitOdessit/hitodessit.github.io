@@ -9,7 +9,7 @@
   <meta name="author" content="Android-Dev.mobi">
 
   
-  <meta name="description" content="Recently I’ve stumbled upon to the interesting talk by Kevlin Henney: Seven Ineffective Coding Habits of Many Programmers. Talk itself is very &hellip;">
+  <meta name="description" content="Using RushORM I’ve found that it is very hard to understand root cause of any database-related issues without internal debug logging, I mean at least &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +70,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/">[RushORM] How to Enable Debug Logging</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-07-01T19:38:14+03:00" pubdate data-updated="true">Jul 1st, 2015</time>
+        
+           | <a href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/#disqus_thread"
+             data-disqus-identifier="http://android-dev.mobi/blog/2015/07/01/rushorm-how-to-enable-debug-logging/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Using <a href="http://www.rushorm.com">RushORM</a> I’ve found that it is very hard to understand root cause of any database-related issues without internal debug logging, I mean at least all SQL queries should be printed into log (RushORM doesn’t enable debug logging by default).</p>
+
+<p>But how to enable debug logging in RushORM? It’s not clear from the documentation, in fact, documentation doesn’t say a word about this feature. Luckily, this feature exists!</p>
+
+<p>Analyzing source code I found how to enable debug logging in RushORM: you simply need to add following flag to your <code>AndroidManifest.xml</code> file, under <code>&lt;application&gt;</code> section:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -333,6 +382,10 @@ It’s easy to integrate, pretty good documentation available, also samples, vid
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/">[RushORM] How to Enable Debug Logging</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary/">[Clean Code] Short Summary - Seven Ineffective Coding Habits of Many Programmers</a>
