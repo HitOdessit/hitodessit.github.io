@@ -11,6 +11,7 @@ Recently I’ve stumbled upon to the interesting talk by Kevlin Henney: [Seven I
 Talk itself is very interesting, and I would agree with Kevlin on most of his points. Among other things, author talks about efficiency of source code reading, clean code without much noise, signal-to-noise ratio, etc. Interestingly, talk itself took more than one hour, which could be interpreted as noisy itself :) In a modern world for many people it’s quite difficult to allocate more than 1 hour in a row to watch such presentation.
 
 So, we’ve decided to write a short summary for the above talk, to help people to quickly go through the main points of the above talk.
+<!--more-->
 
 <ol>
 <li>
@@ -47,7 +48,7 @@ public ResultType arbitraryMethodName(
 
 <li>
 ### Lego Naming
-Choose moderate (not very short, but not too long) names for your classes, variables, methods, etc. Below you can find some of standard Java Exception classes and recommended by Kevlin alternatives (shorter and more clear) names for these classes:
+Choose moderate (not very short, but not too long) names for your classes, variables, methods, etc. Below you can find some of standard Java Exception classes and recommended by Kevlin alternatives (shorter and more clear) names for these classes:  
 `ClassNotFoundException` -> **`ClassNotFound`** <br/>
 `ArithmeticException` -> **`IntegerDivisionByZero`** <br/>
 `ArrayStoreException` -> **`IllegalArrayElementType`** <br/>
@@ -118,4 +119,4 @@ public final class Money implements ...
 {% endblockquote %}
 Do NOT test methods, **test classes**. A test case should be just that: it should correspond to a single case.
 
-PS: I do recommend to watch full talk, 'cos it contains much more information that presented in this short summary.
+PS: I do recommend to watch full talk, because it contains much more information that presented in this short summary.
