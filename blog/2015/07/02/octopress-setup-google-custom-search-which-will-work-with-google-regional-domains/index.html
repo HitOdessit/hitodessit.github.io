@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[Wear] Avoid System Timeout to Close the Activity - Modern Android development for phones, tablets and wearables</title>
+  <title>[Octopress] How to Setup Google Custom Search for Octopress Which Will Work With Google Regional Domains - Modern Android development for phones, tablets and wearables</title>
   <meta name="author" content="Jiggy Team">
 
   
-  <meta name="description" content="Interestingly, by default Android Wear close the application activity after 30 seconds of idle.
-It means that Google wants Wear apps be “lightweight &hellip;">
+  <meta name="description" content="Octopress has built-in feature - “simple_search”, which by default assigned to Google Custom Search. It intended to provide Google search only among &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ It means that Google wants Wear apps be “lightweight &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity">
+  <link rel="canonical" href="http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Modern Android development for phones, tablets and wearables" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -94,7 +93,7 @@ It means that Google wants Wear apps be “lightweight &hellip;">
   
   <header>
     
-      <h1 class="entry-title">[Wear] Avoid System Timeout to Close the Activity</h1>
+      <h1 class="entry-title">[Octopress] How to Setup Google Custom Search for Octopress Which Will Work With Google Regional Domains</h1>
     
     
       <p class="meta">
@@ -111,7 +110,7 @@ It means that Google wants Wear apps be “lightweight &hellip;">
 
 
 
-<time datetime="2015-05-06T12:57:34+03:00" pubdate data-updated="true">May 6th, 2015</time>
+<time datetime="2015-07-02T20:01:40+03:00" pubdate data-updated="true">Jul 2nd, 2015</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://android-dev.mobi">Comments</a>
@@ -121,34 +120,31 @@ It means that Google wants Wear apps be “lightweight &hellip;">
   </header>
 
 
-<div class="entry-content"><p>Interestingly, by default Android Wear close the application activity after 30 seconds of idle.
-It means that Google wants Wear apps be “lightweight” -  designed to work in short-time interaction with user.</p>
-
-<p>But still Android is Android :) Here you can avoid almost everything.</p>
-
-<p>Just add <code>android:keepScreenOn="true"</code> to your activities root view XML and timeout will be dismissed.</p>
-
-<p>Alternatively, you can <a href="https://developer.android.com/training/scheduling/wakelock.html#screen">set same flag at runtime from Java code</a>
-like:</p>
+<div class="entry-content"><p>Octopress has built-in feature - “simple_search”, which by default assigned to <em>Google Custom Search</em>. It intended to provide Google search only among pages of your website, no other website from the web should be included in search results. Feature is configured in <code>_config.yml</code> file in your Octopress root folder. By default it has the following value:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">getWindow</span><span class="o">().</span><span class="na">addFlags</span><span class="o">(</span><span class="n">WindowManager</span><span class="o">.</span><span class="na">LayoutParams</span><span class="o">.</span><span class="na">FLAG_KEEP_SCREEN_ON</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="err">simple_search:</span> <span class="err">https://www.google.com/search</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>Do not abuse this option, because it may drain wearable device’s battery!</strong></p>
+<p>Everything looks good, but when I’ve tried to search something using this feature I’ve faced problem - when my browser trying to open <code>google.com</code> domain, it automatically redirects this request to my regional domain (in my case <code>google.com.ua</code>). So far so good, but during that redirection request loses one of the important parameter - your website among which Google must search! So, in response you get search results among all the web, which, of course, is not what we wanted.</p>
+
+<p>Changing Google search preferences of my personal account is not solving the problem, because visitors of your site still may face the same problem.
+Short “googling” didn’t give any results, so I’ve found my own solution - change <code>simple_search:</code> parameter value to different Google subdomain, in which case request preserve all original parameters. Here is my value for this param:</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="err">simple_search:</span> <span class="err">https://encrypted.google.com/search</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you’re using <code>encrypted.</code> subdomain, Google doesn’t redirect your request to a regional subdomain, which solves the problem.</p>
+
+<p>Hope this will help someone.</p>
 </div>
 
 
@@ -172,12 +168,12 @@ like:</p>
 
 
 
-<time datetime="2015-05-06T12:57:34+03:00" pubdate data-updated="true">May 6th, 2015</time>
+<time datetime="2015-07-02T20:01:40+03:00" pubdate data-updated="true">Jul 2nd, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/android/'>android</a>, <a class='category' href='/blog/categories/ui/'>ui</a>, <a class='category' href='/blog/categories/wear/'>wear</a>
+    <a class='category' href='/blog/categories/blog/'>blog</a>, <a class='category' href='/blog/categories/octopress/'>octopress</a>, <a class='category' href='/blog/categories/search/'>search</a>, <a class='category' href='/blog/categories/web/'>web</a>
   
 </span>
 
@@ -186,7 +182,7 @@ like:</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/" data-via="" data-counturl="http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/" data-via="" data-counturl="http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/" >Tweet</a>
   
   
   
@@ -197,10 +193,8 @@ like:</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistent-storage/" title="Previous Post: [Realm] First look into brand new Mobile persistent storage">&laquo; [Realm] First look into brand new Mobile persistent storage</a>
+        <a class="basic-alignment left" href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/" title="Previous Post: [RushORM] How to enable debug logging">&laquo; [RushORM] How to enable debug logging</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/" title="Next Post: [RushORM] Using predefined database on both Mobile and Wear apps">[RushORM] Using predefined database on both Mobile and Wear apps &raquo;</a>
       
     </p>
   </footer>
@@ -275,8 +269,8 @@ like:</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/';
-        var disqus_url = 'http://android-dev.mobi/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/';
+        var disqus_identifier = 'http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/';
+        var disqus_url = 'http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/';
         var disqus_script = 'embed.js';
       
     (function () {

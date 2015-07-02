@@ -9,7 +9,7 @@
   <meta name="author" content="Jiggy Team">
 
   
-  <meta name="description" content="Using RushORM I’ve found that it is very hard to understand root cause of any database-related issues without internal debug logging, I mean at least &hellip;">
+  <meta name="description" content="Octopress has built-in feature - “simple_search”, which by default assigned to Google Custom Search. It intended to provide Google search only among &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +90,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/">[Octopress] How to Setup Google Custom Search for Octopress Which Will Work With Google Regional Domains</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-07-02T20:01:40+03:00" pubdate data-updated="true">Jul 2nd, 2015</time>
+        
+           | <a href="/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/#disqus_thread"
+             data-disqus-identifier="http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopress has built-in feature - “simple_search”, which by default assigned to <em>Google Custom Search</em>. It intended to provide Google search only among pages of your website, no other website from the web should be included in search results. Feature is configured in <code>_config.yml</code> file in your Octopress root folder. By default it has the following value:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ini'><span class='line'><span class="err">simple_search:</span> <span class="err">https://www.google.com/search</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Everything looks good, but when I’ve tried to search something using this feature I’ve faced problem - when my browser trying to open <code>google.com</code> domain, it automatically redirects this request to my regional domain (in my case <code>google.com.ua</code>). So far so good, but during that redirection request loses one of the important parameter - your website among which Google must search! So, in response you get search results among all the web, which, of course, is not what we wanted.</p>
+
+<p>Changing Google search preferences of my personal account is not solving the problem, because visitors of your site still may face the same problem.
+Short “googling” didn’t give any results, so I’ve found my own solution - change <code>simple_search:</code> parameter value to different Google subdomain, in which case request preserve all original parameters. Here is my value for this param:</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -404,6 +459,10 @@ It’s easy to integrate, pretty good documentation available, also samples, vid
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/">[Octopress] How to Setup Google Custom Search for Octopress Which Will Work With Google Regional Domains</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/">[RushORM] How to Enable Debug Logging</a>
       </li>
     
@@ -417,10 +476,6 @@ It’s easy to integrate, pretty good documentation available, also samples, vid
     
       <li class="post">
         <a href="/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/">[Wear] Avoid System Timeout to Close the Activity</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/30/realm-first-look-into-brand-new-mobile-persistent-storage/">[Realm] First Look Into Brand New Mobile Persistent Storage</a>
       </li>
     
   </ul>
