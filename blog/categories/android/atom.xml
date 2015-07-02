@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-07-02T15:39:11+03:00</updated>
+  <updated>2015-07-02T15:49:25+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[Android-Dev.mobi]]></name>
@@ -45,15 +45,15 @@
 
 <blockquote><p>Assemble both mobile and wearable apps with the same RushORM database (.db file) with some predefined data in it, which will be absolutely the same for mobile and wear apps.</p></blockquote>
 
-<p>While developing one of our apps, we were needed to ship both mobile and wear apps with the same set of “predefined” (pre-populated) data. However, user should be able to modify this data, add new or delete existed.</p>
+<p>While developing one of our apps, we were needed to ship both mobile and wear apps with the same set of “predefined” (pre-populated) data. However, a user should be able to modify this data, add new or delete existed.</p>
 
-<p>Using Android’s Framework <code>res</code> folder seems like not an option, because we can’t modify it’s content at runtime. Another idea is to upload that “predefined” data to some server, lets say in JSON format, download it during first app launch and store it in RushORM database using <code>RushCore.getInstance().deserialize(jsonString)</code> API. This may seems like a nice option, but it introduces few dependencies which we don’t want to have in our apps, like:</p>
+<p>Using Android’s Framework <code>res</code> folder seems like not an option because we can’t modify its content at runtime. Another idea is to upload that “predefined” data to some server, lets say in JSON format, download it during first app launch and store it in RushORM database using <code>RushCore.getInstance().deserialize(jsonString)</code> API. This may seems like a nice option, but it introduces few dependencies which we don’t want to have in our apps, like:</p>
 
 <ul>
 <li>Internet connection is required during first app start.</li>
-<li>Downloading, parsing and storing data into database increase first startup time, therefore worsens user experience.</li>
-<li>Some server is required, however it could be simply Dropbox with publicly shared files.</li>
-<li>Some script is required to upload generated files to remote server, and also to download these files from server to Android device.</li>
+<li>Downloading, parsing and storing data into database increase first startup time, therefore, worsens User Experience.</li>
+<li>Some server is required, however, it could be simply Dropbox with publicly shared files.</li>
+<li>Some script is required to upload generated files to a remote server, and also to download these files from a server to Android device.</li>
 </ul>
 
 
@@ -67,8 +67,8 @@
 </ul>
 
 
-<p>To implement first part, we’ve created separate module in our Android project called <code>db-generator</code>. It’s a separate mobile app, which is very simple - just initialize empty RushORM database and then run data generation process, which saves generated data (business objects in our case) into DB, synchronously, using methods like <code>RushCore.getInstance().save(List&lt;? extends Rush&gt; objects)</code>.
-RushORM store files in <code>/data/data/&lt;yourAppID&gt;/databases/</code> directory. After database was generated, we need to get it from rooted Android device or Android emulator where you were running <code>db-generator</code>. We can pull files using <code>adb pull</code> command. To make this process automated, we’ve created simple <code>Makefile</code>:</p>
+<p>To implement first part, we’ve created a separate module in our Android project called <code>db-generator</code>. It’s a separate mobile app, which is very simple - just initialize empty RushORM database and then run data generation process, which saves generated data (business objects in our case) into DB, synchronously, using methods like <code>RushCore.getInstance().save(List&lt;? extends Rush&gt; objects)</code>.
+RushORM store files in <code>/data/data/&lt;yourAppID&gt;/databases/</code> directory. After the database was generated, we need to get it from rooted Android device or Android emulator where you were running <code>db-generator</code>. We can pull files using <code>adb pull</code> command. To make this process automated, we’ve created simple <code>Makefile</code>:</p>
 
 <pre><code class="make">THIS_FILE := $(lastword $(MAKEFILE_LIST))
 
@@ -123,7 +123,7 @@ private static void copyFile(Context context, String name) throws IOException {
 
 <p>After that is done, we can initialize RushORM with <code>predefined.db</code> file.</p>
 
-<p>PS: Theoretically, it could be possible to run <code>db-generator</code> on desktop, but we didn’t try this approach. If you have some information about launching RushORM on desktop, please share it with us in comments.</p>
+<p>PS: Theoretically, it could be possible to run <code>db-generator</code> on a desktop, but we didn’t try this approach. If you have some information about launching RushORM on a desktop, please share it with us in comments.</p>
 ]]></content>
   </entry>
   

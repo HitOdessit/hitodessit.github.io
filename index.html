@@ -223,15 +223,15 @@
 
 <blockquote><p>Assemble both mobile and wearable apps with the same RushORM database (.db file) with some predefined data in it, which will be absolutely the same for mobile and wear apps.</p></blockquote>
 
-<p>While developing one of our apps, we were needed to ship both mobile and wear apps with the same set of “predefined” (pre-populated) data. However, user should be able to modify this data, add new or delete existed.</p>
+<p>While developing one of our apps, we were needed to ship both mobile and wear apps with the same set of “predefined” (pre-populated) data. However, a user should be able to modify this data, add new or delete existed.</p>
 
-<p>Using Android’s Framework <code>res</code> folder seems like not an option, because we can’t modify it’s content at runtime. Another idea is to upload that “predefined” data to some server, lets say in JSON format, download it during first app launch and store it in RushORM database using <code>RushCore.getInstance().deserialize(jsonString)</code> API. This may seems like a nice option, but it introduces few dependencies which we don’t want to have in our apps, like:</p>
+<p>Using Android’s Framework <code>res</code> folder seems like not an option because we can’t modify its content at runtime. Another idea is to upload that “predefined” data to some server, lets say in JSON format, download it during first app launch and store it in RushORM database using <code>RushCore.getInstance().deserialize(jsonString)</code> API. This may seems like a nice option, but it introduces few dependencies which we don’t want to have in our apps, like:</p>
 
 <ul>
 <li>Internet connection is required during first app start.</li>
-<li>Downloading, parsing and storing data into database increase first startup time, therefore worsens user experience.</li>
-<li>Some server is required, however it could be simply Dropbox with publicly shared files.</li>
-<li>Some script is required to upload generated files to remote server, and also to download these files from server to Android device.</li>
+<li>Downloading, parsing and storing data into database increase first startup time, therefore, worsens User Experience.</li>
+<li>Some server is required, however, it could be simply Dropbox with publicly shared files.</li>
+<li>Some script is required to upload generated files to a remote server, and also to download these files from a server to Android device.</li>
 </ul>
 
 
