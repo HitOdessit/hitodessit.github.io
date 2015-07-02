@@ -4,7 +4,7 @@
   <title><![CDATA[Category: External Links | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/external-links/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-07-02T09:22:33+03:00</updated>
+  <updated>2015-07-02T15:39:11+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[Android-Dev.mobi]]></name>
@@ -20,7 +20,7 @@
     <id>http://android-dev.mobi/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary</id>
     <content type="html"><![CDATA[<p>Recently I’ve stumbled upon to the interesting talk by Kevlin Henney: <a href="http://www.infoq.com/presentations/7-ineffective-coding-habits">Seven Ineffective Coding Habits of Many Programmers</a>.</p>
 
-<p>Talk itself is very interesting, and I would agree with Kevlin on most of his points. Among other things, author talks about efficiency of source code reading, clean code without much noise, signal-to-noise ratio, etc. Interestingly, talk itself took more than one hour, which could be interpreted as noisy itself :) In a modern world for many people it’s quite difficult to allocate more than 1 hour in a row to watch such presentation.</p>
+<p>The talk itself is very interesting, and I would agree with Kevlin on most of his points. Among other things, author talks about the efficiency of source code reading, clean code without much noise, signal-to-noise ratio, etc. Interestingly, talk itself took more than one hour, which could be interpreted as &ldquo;noisy&rdquo; itself :) In a modern world for many people it’s quite difficult to allocate more than 1 hour in a row to watch such presentation.</p>
 
 <p>So, we’ve decided to write a short summary for the above talk, to help people to quickly go through the main points of the above talk.</p>
 
@@ -34,7 +34,7 @@
 
 <h3>Noisy code</h3>
 
-<p>Try to minimize number of lines of “noise” in your code, try to make code as simple and &ldquo;noiseless&rdquo; as possible. Keep in mind that your code will be read by humans, and they need to understand it easily. In a lot of noise it&rsquo;s hard to find and identify real important code issues.<br/>
+<p>Try to minimize the number of lines of “noise” in your code, try to make the code as simple and &ldquo;noiseless&rdquo; as possible. Keep in mind that your code will be read by humans, and they need to understand it easily. In a lot of noises, it&rsquo;s hard to find and identify real important code issues.<br/>
 Do not write obvious comments. They only produce more noise to the code.
 Examples of bad comments: <code>i = i + 1; /* Add one to i */</code> and <code>System.out.println(“Hello World!”); // display the string</code>
 <blockquote><p>A common fallacy is to assume authors of incomprehensible code will somehow be able to express themselves lucidly and clearly in comments.</p><footer><strong>Kevlin Henney <a href="https://twitter.com/KevlinHenney/status/381021802941906944">https://twitter.com/KevlinHenney/status/381021802941906944</a></strong></footer></blockquote>
@@ -44,8 +44,8 @@ Examples of bad comments: <code>i = i + 1; /* Add one to i */</code> and <code>S
 
 <h3>Unsustainable Spacing</h3>
 
-<p>Respect <strong>“80 column rule”</strong> - it’s not about screen sizes, it’s more about “ape vision”. It’s difficult for human eyes to read long lines of text. That’s why magazines, newpapers, modern websites are all using limited width for a content. Your code should leverage that knowledge too.
-Example of a good formatting, according to Kevlin:
+<p>Respect <strong>“80 column rule”</strong> - it’s not about screen sizes, it’s more about “ape vision”. It’s difficult for human eyes to read long lines of text. That’s why magazines, newspapers, modern websites are all using the limited width for a content. Your code should leverage that knowledge too.
+An example of a good formatting, according to Kevlin:
 <code>java
 public ResultType arbitraryMethodName(
     FirstArgumentType firstArgument,
@@ -68,7 +68,7 @@ public ResultType arbitraryMethodName(
 
 <h3>Lego Naming</h3>
 
-<p>Choose moderate (not very short, but not too long) names for your classes, variables, methods, etc. Below you can find some of standard Java Exception classes and recommended by Kevlin alternatives (shorter and more clear) names for these classes:<br/>
+<p>Choose moderate (not very short, but not too long) names for your classes, variables, methods, etc. Below you can find some of standard Java Exception classes and their alternative names for these classes (shorter and more clear), recommended by Kevlin:<br/>
 <code>ClassNotFoundException</code> -> <strong><code>ClassNotFound</code></strong> <br/>
 <code>ArithmeticException</code> -> <strong><code>IntegerDivisionByZero</code></strong> <br/>
 <code>ArrayStoreException</code> -> <strong><code>IllegalArrayElementType</code></strong> <br/>
@@ -85,7 +85,7 @@ public ResultType arbitraryMethodName(
 <p><blockquote><p>Take your code base, stripout all of the string literals, stripout all of the comments, and then take your source code and put it in a tag cloud generator. And then see what it’s look like.</p><footer><strong>Kevlin Henney <a href="http://www.infoq.com/presentations/7-ineffective-coding-habits">http://www.infoq.com/presentations/7-ineffective-coding-habits</a> Seven Ineffective Coding Habits of Many Programmers</strong></footer></blockquote>
 Ask yourself a question “What is your system about?”.
 Your codebase should represent your <strong>domain knowledge</strong>, not language syntax. More info: <a href="http://philcalcado.com/2009/04/29/tag-clouds-see-how-noisy-your-code-is/">http://philcalcado.com/2009/04/29/tag-clouds-see-how-noisy-your-code-is/</a> <br/>
-Good example of underabstracted code:
+A good example of under abstracted code:
 <code>Java
 // Initial code
 if (portfolioIdsByTraderId.get(trader.getId()) .containsKey(portfolio.getId())) {
@@ -109,7 +109,7 @@ if (trader.canView(portfolio)) {
 
 <h3>Getters and Setters</h3>
 
-<p>“set” is NOT the opposite of “get”, the opposite is “reset” or “unset”. These two words has the most entries in English dictionary, so they are very ambiguous, try to limit usage of above words in your code.
+<p>“set” is NOT the opposite of “get”, the opposite is “reset” or “unset”. These two words has the most entries in English dictionary, so they are very ambiguous, try to limit the usage of above words in your code.
 For example, instead of:
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -163,7 +163,7 @@ For example, instead of:
 <p><blockquote><p>￼Everybody knows that TDD stands for Test Driven Development. However, people too often concentrate on the words &ldquo;Test&rdquo; and &ldquo;Development&rdquo; and don&rsquo;t consider what the word <strong>&ldquo;Driven&rdquo;</strong> really implies. For tests to drive development they must do more than just test that code performs its required functionality: they must clearly express that required functionality to the reader. That is, they must be clear specifications of the required functionality. Tests that are not written with their role as specifications in mind can be very confusing to read.</p><footer><strong>Nat Pryce and Steve Freeman &ldquo;Are Your Tests Really Driving Your Development?&rdquo;</strong></footer></blockquote>
 Do NOT test methods, <strong>test classes</strong>. A test case should be just that: it should correspond to a single case.</p>
 
-<p>PS: I do recommend to watch full talk, because it contains much more information that presented in this short summary.</p>
+<p>PS: I do recommend to watch the full talk because it contains much more information that presented in this short summary.</p>
 ]]></content>
   </entry>
   

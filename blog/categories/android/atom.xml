@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-07-02T09:22:33+03:00</updated>
+  <updated>2015-07-02T15:39:11+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[Android-Dev.mobi]]></name>
@@ -20,7 +20,7 @@
     <id>http://android-dev.mobi/blog/2015/07/01/rushorm-how-to-enable-debug-logging</id>
     <content type="html"><![CDATA[<p>Using <a href="http://www.rushorm.com">RushORM</a> I’ve found that it is very hard to understand root cause of any database-related issues without internal debug logging, I mean at least all SQL queries should be printed into log (RushORM doesn’t enable debug logging by default).</p>
 
-<p>But how to enable debug logging in RushORM? It’s not clear from the documentation, in fact, documentation doesn’t say a word about this feature. Luckily, this feature exists!</p>
+<p>But how to enable debug logging in RushORM? It’s not clear from the documentation, in fact, the documentation doesn’t say a word about this feature. Luckily, this feature exists!</p>
 
 <p>Analyzing source code I found how to enable debug logging in RushORM: you simply need to add following flag to your <code>AndroidManifest.xml</code> file, under <code>&lt;application&gt;</code> section:</p>
 
@@ -30,7 +30,7 @@
 <pre><code class="xml">&lt;meta-data android:name="Rush_log" android:value="true" /&gt;
 </code></pre>
 
-<p>That’s it! With this option RushORM will print all SQL queries he’s going to execute into Logcat. Very helpful for troubleshooting.</p>
+<p>That’s it! With this option enabled, RushORM will print all SQL queries he’s going to execute into Logcat. Very helpful for troubleshooting.</p>
 
 <p>PS: <strong>@Stu_cams</strong>, you should add this flag into <em>Setup</em> section of documentation on RushORM website.</p>
 ]]></content>
