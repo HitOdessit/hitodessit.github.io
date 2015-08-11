@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Realm | Modern Android development for phones, tablets and wearables]]></title>
   <link href="http://android-dev.mobi/blog/categories/realm/atom.xml" rel="self"/>
   <link href="http://android-dev.mobi/"/>
-  <updated>2015-08-11T18:13:23+03:00</updated>
+  <updated>2015-08-11T17:55:16+03:00</updated>
   <id>http://android-dev.mobi/</id>
   <author>
     <name><![CDATA[Jiggy Team]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>Starting new project we spent some time investigating new approaches for data persistent storage on Android Platform.</p>
 
 <p>One of the newest and the most promising library everybody is talking about is <a href="http://realm.io">Realm</a>.
-This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promise very handy and fast object-oriented access to local storage.</p>
+This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promises very handy and fast object-oriented access to local storage.</p>
 
 <p>What can be better that writing something like:</p>
 
