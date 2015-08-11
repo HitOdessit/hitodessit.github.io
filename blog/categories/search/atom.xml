@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Search | Modern Android development for phones, tablets and wearables]]></title>
+  <link href="http://android-dev.mobi/blog/categories/search/atom.xml" rel="self"/>
+  <link href="http://android-dev.mobi/"/>
+  <updated>2015-08-11T18:13:23+03:00</updated>
+  <id>http://android-dev.mobi/</id>
+  <author>
+    <name><![CDATA[Jiggy Team]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[Octopress] How to Setup Google Custom Search for Octopress Which Will Work With Google Regional Domains]]></title>
+    <link href="http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/"/>
+    <updated>2015-07-02T20:01:40+03:00</updated>
+    <id>http://android-dev.mobi/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains</id>
+    <content type="html"><![CDATA[<p>Octopress has built-in feature - “simple_search”, which by default assigned to <em>Google Custom Search</em>. It intended to provide Google search only among pages of your website, no other websites from the web should be included in search results. Feature is configured in <code>_config.yml</code> file in your Octopress root folder. By default it has the following value:</p>
+
+<pre><code class="ini">simple_search: https://www.google.com/search
+</code></pre>
+
+<p>Everything looks good, but when I’ve tried to search something using this feature I’ve faced problem - when my browser trying to open <code>google.com</code> domain, it automatically redirects this request to my regional domain (in my case <code>google.com.ua</code>). So far so good, but during that redirection request loses one of the important parameters - your website among which Google must search! So, in response you get search results among all the web, which, of course, is not what we wanted.</p>
+
+<p>Changing Google search preferences of my personal account is not solving the problem, because visitors of your site still may face the same problem.
+Short “googling” didn’t give any results, so I’ve found my own solution - change <code>simple_search:</code> parameter value to different Google subdomain, in which case request preserve all original parameters. Here is my value for this param:</p>
+
+<!--more-->
+
+
+<pre><code class="ini">simple_search: https://encrypted.google.com/search
+</code></pre>
+
+<p>If you’re using <code>encrypted.</code> subdomain, Google doesn’t redirect your request to a regional subdomain, which solves the problem.</p>
+
+<p>Hope this will help someone.</p>
+]]></content>
+  </entry>
+  
+</feed>
