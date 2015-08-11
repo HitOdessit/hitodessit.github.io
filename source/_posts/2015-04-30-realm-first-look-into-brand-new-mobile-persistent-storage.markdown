@@ -9,7 +9,7 @@ categories: [Database, Realm, Android, Wear, Mobile]
 Starting new project we spent some time investigating new approaches for data persistent storage on Android Platform.
 
 One of the newest and the most promising library everybody is talking about is [Realm](http://realm.io).
-This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promise very handy and fast object-oriented access to local storage.
+This is noSQL, non-relational storage written on C++ for Android and iOS platforms which promises very handy and fast object-oriented access to local storage.
 
 What can be better that writing something like:
 
