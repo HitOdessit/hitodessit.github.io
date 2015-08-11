@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[Clean Code] Short Summary - Seven Ineffective Coding Habits of Many Programmers - Modern Android development for phones, tablets and wearables</title>
+  <meta name="author" content="Jiggy Team">
+
+  
+  <meta name="description" content="Recently I’ve stumbled upon to the interesting talk by Kevlin Henney: Seven Ineffective Coding Habits of Many Programmers. The talk itself is very &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://android-dev.mobi/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Modern Android development for phones, tablets and wearables" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-63303522-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Modern Android development for phones, tablets and wearables</a></h1>
+  
+    <h2>Personal blog of a small team of Android engineers who believe that Android development should be very simple, fast and reliable.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  
+  
+</ul>
+
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories">Categories</a></li>
+  <li><a href="/about/">About</a></li>
+  <li><a href="https://www.facebook.com/AndroidDev.mobi?fref=blog"><img src="/images/fb_logo_35x35.png" alt="Facebook Page" title="Facebook Page"></a></li>
+  <li><a href="/atom.xml"><img src="/images/rss_logo_35x35.png" alt="RSS" title="RSS"></a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[Clean Code] Short Summary - Seven Ineffective Coding Habits of Many Programmers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-16T13:04:44+03:00" pubdate data-updated="true">Jun 16th, 2015</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://android-dev.mobi">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recently I’ve stumbled upon to the interesting talk by Kevlin Henney: <a href="http://www.infoq.com/presentations/7-ineffective-coding-habits">Seven Ineffective Coding Habits of Many Programmers</a>.</p>
+
+<p>The talk itself is very interesting, and I would agree with Kevlin on most of his points. Among other things, author talks about the efficiency of source code reading, clean code without much noise, signal-to-noise ratio, etc. Interestingly, talk itself took more than one hour, which could be interpreted as &ldquo;noisy&rdquo; itself :) In a modern world for many people it’s quite difficult to allocate more than 1 hour in a row to watch such presentation.</p>
+
+<p>So, we’ve decided to write a short summary for the above talk, to help people to quickly go through the main points of the above talk.</p>
+
+<!--more-->
+
+
+
+
+<p><ol>
+<li></p>
+
+<h3>Noisy code</h3>
+
+<p>Try to minimize the number of lines of “noise” in your code, try to make the code as simple and &ldquo;noiseless&rdquo; as possible. Keep in mind that your code will be read by humans, and they need to understand it easily. In a lot of noises, it&rsquo;s hard to find and identify real important code issues.<br/>
+Do not write obvious comments. They only produce more noise to the code.
+Examples of bad comments: <code>i = i + 1; /* Add one to i */</code> and <code>System.out.println(“Hello World!”); // display the string</code>
+<blockquote><p>A common fallacy is to assume authors of incomprehensible code will somehow be able to express themselves lucidly and clearly in comments.</p><footer><strong>Kevlin Henney</strong> <cite><a href='https://twitter.com/KevlinHenney/status/381021802941906944'>twitter.com/KevlinHenney/status/&hellip;</a></cite></footer></blockquote>
+</li></p>
+
+<p><li></p>
+
+<h3>Unsustainable Spacing</h3>
+
+<p>Respect <strong>“80 column rule”</strong> - it’s not about screen sizes, it’s more about “ape vision”. It’s difficult for human eyes to read long lines of text. That’s why magazines, newspapers, modern websites are all using the limited width for a content. Your code should leverage that knowledge too.
+An example of a good formatting, according to Kevlin:
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">ResultType</span> <span class="nf">arbitraryMethodName</span><span class="o">(</span>
+</span><span class='line'>    <span class="n">FirstArgumentType</span> <span class="n">firstArgument</span><span class="o">,</span>
+</span><span class='line'>    <span class="n">SecondArgumentType</span> <span class="n">secondArgument</span><span class="o">,</span>
+</span><span class='line'>    <span class="n">ThirdArgumentType</span> <span class="n">thirdArgument</span><span class="o">)</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="n">LocalVariableType</span> <span class="n">localVariable</span> <span class="o">=</span>
+</span><span class='line'>        <span class="n">method</span><span class="o">(</span><span class="n">firstArgument</span><span class="o">,</span> <span class="n">secondArgument</span><span class="o">);</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">localVariable</span><span class="o">.</span><span class="na">isSomething</span><span class="o">(</span>
+</span><span class='line'>        <span class="n">thirdArgument</span><span class="o">,</span> <span class="n">SOME_SHOUTY_CONSTANT</span><span class="o">))</span>
+</span><span class='line'>    <span class="o">{</span>
+</span><span class='line'>        <span class="n">doSomething</span><span class="o">(</span><span class="n">localVariable</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">localVariable</span><span class="o">.</span><span class="na">getSomething</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</li></p>
+
+<p><li></p>
+
+<h3>Lego Naming</h3>
+
+<p>Choose moderate (not very short, but not too long) names for your classes, variables, methods, etc. Below you can find some of standard Java Exception classes and their alternative names for these classes (shorter and more clear), recommended by Kevlin:<br/>
+<code>ClassNotFoundException</code> -> <strong><code>ClassNotFound</code></strong> <br/>
+<code>ArithmeticException</code> -> <strong><code>IntegerDivisionByZero</code></strong> <br/>
+<code>ArrayStoreException</code> -> <strong><code>IllegalArrayElementType</code></strong> <br/>
+<code>ClassCastException</code> -> <strong><code>CastToNonSubclass</code></strong> <br/>
+<code>InstantiationException</code> -> <strong><code>ClassCannotBeInstantiated</code></strong> <br/>
+<code>NullPointerException</code> -> <strong><code>NullDereferenced</code></strong> <br/>
+<code>SecurityException</code> -> <strong><code>SecurityViolation</code></strong>
+</li></p>
+
+<p><li></p>
+
+<h3>￼ Underabstraction</h3>
+
+<p><blockquote><p>Take your code base, stripout all of the string literals, stripout all of the comments, and then take your source code and put it in a tag cloud generator. And then see what it’s look like.</p><footer><strong>Kevlin Henney</strong> <cite><a href='http://www.infoq.com/presentations/7-ineffective-coding-habits'>Seven Ineffective Coding Habits of Many Programmers</a></cite></footer></blockquote>
+Ask yourself a question “What is your system about?”.
+Your codebase should represent your <strong>domain knowledge</strong>, not language syntax. More info: <a href="http://philcalcado.com/2009/04/29/tag-clouds-see-how-noisy-your-code-is/">http://philcalcado.com/2009/04/29/tag-clouds-see-how-noisy-your-code-is/</a> <br/>
+A good example of under abstracted code:
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="c1">// Initial code</span>
+</span><span class='line'><span class="k">if</span> <span class="o">(</span><span class="n">portfolioIdsByTraderId</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">trader</span><span class="o">.</span><span class="na">getId</span><span class="o">())</span> <span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">portfolio</span><span class="o">.</span><span class="na">getId</span><span class="o">()))</span> <span class="o">{</span>
+</span><span class='line'>    <span class="o">&hellip;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c1">// Refactored code</span>
+</span><span class='line'><span class="k">if</span> <span class="o">(</span><span class="n">trader</span><span class="o">.</span><span class="na">canView</span><span class="o">(</span><span class="n">portfolio</span><span class="o">))</span> <span class="o">{</span>
+</span><span class='line'>    <span class="o">&hellip;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</li></p>
+
+<p><li></p>
+
+<h3>￼ Unencapsulated State</h3>
+
+<p>Do no use <strong>Singletons</strong>, they are almost always bad.
+<blockquote><p>￼Don&rsquo;t ever invite a vampire into your house, you silly boy. It renders you powerless.</p><footer><strong>The Lost boys</strong></footer></blockquote>
+￼</li>
+<li></p>
+
+<h3>Getters and Setters</h3>
+
+<p>“set” is NOT the opposite of “get”, the opposite is “reset” or “unset”. These two words has the most entries in English dictionary, so they are very ambiguous, try to limit the usage of above words in your code.
+For example, instead of:
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Money</span> <span class="kd">implements</span> <span class="o">&hellip;</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUnits</span><span class="o">()</span> <span class="o">&hellip;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getHundredths</span><span class="o">()</span> <span class="o">&hellip;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Currency</span> <span class="nf">getCurrency</span><span class="o">()</span> <span class="o">&hellip;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUnits</span><span class="o">(</span><span class="kt">int</span> <span class="n">newUnits</span><span class="o">)</span> <span class="o">&hellip;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHundredths</span><span class="o">(</span><span class="kt">int</span> <span class="n">newHundredths</span><span class="o">)</span> <span class="o">&hellip;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCurrency</span><span class="o">(</span><span class="n">Currency</span> <span class="n">newCurrency</span><span class="o">)</span> <span class="o">&hellip;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+Write it like the following:
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='Java'><span class='line'><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Money</span> <span class="kd">implements</span> <span class="o">&hellip;</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getUnits</span><span class="o">()</span> <span class="o">&hellip;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getHundredths</span><span class="o">()</span> <span class="o">&hellip;</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Currency</span> <span class="nf">getCurrency</span><span class="o">()</span> <span class="o">&hellip;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+</li></p>
+
+<p><li></p>
+
+<h3>Uncohesive Tests</h3>
+
+<p><blockquote><p>￼Everybody knows that TDD stands for Test Driven Development. However, people too often concentrate on the words &ldquo;Test&rdquo; and &ldquo;Development&rdquo; and don&rsquo;t consider what the word <strong>&ldquo;Driven&rdquo;</strong> really implies. For tests to drive development they must do more than just test that code performs its required functionality: they must clearly express that required functionality to the reader. That is, they must be clear specifications of the required functionality. Tests that are not written with their role as specifications in mind can be very confusing to read.</p><footer><strong>Nat Pryce and Steve Freeman &ldquo;Are Your Tests Really Driving Your Development?&rdquo;</strong></footer></blockquote>
+Do NOT test methods, <strong>test classes</strong>. A test case should be just that: it should correspond to a single case.</p>
+
+<p>PS: I do recommend to watch the full talk because it contains much more information that presented in this short summary.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jiggy Team</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2015-06-16T13:04:44+03:00" pubdate data-updated="true">Jun 16th, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code-style/'>code style</a>, <a class='category' href='/blog/categories/external-links/'>external links</a>, <a class='category' href='/blog/categories/presentations/'>presentations</a>, <a class='category' href='/blog/categories/video/'>video</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://android-dev.mobi/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary/" data-via="" data-counturl="http://android-dev.mobi/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/" title="Previous Post: [RushORM] Using predefined database on both Mobile and Wear apps">&laquo; [RushORM] Using predefined database on both Mobile and Wear apps</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/" title="Next Post: [RushORM] How to enable debug logging">[RushORM] How to enable debug logging &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+  <aside class="sidebar">
+   
+<form action="https://encrypted.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:android-dev.mobi" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/02/octopress-setup-google-custom-search-which-will-work-with-google-regional-domains/">[Octopress] How to Setup Google Custom Search for Octopress Which Will Work With Google Regional Domains</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/01/rushorm-how-to-enable-debug-logging/">[RushORM] How to Enable Debug Logging</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary/">[Clean Code] Short Summary - Seven Ineffective Coding Habits of Many Programmers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/17/rushorm-using-predefined-database-on-both-mobile-and-wear-apps/">[RushORM] Using Predefined Database on Both Mobile and Wear Apps</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/05/06/wear-avoid-system-timeout-to-close-the-activity/">[Wear] Avoid System Timeout to Close the Activity</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - <a href="http://android-dev.mobi/">Jiggy Team</a> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'androiddevmobi';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://android-dev.mobi/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary/';
+        var disqus_url = 'http://android-dev.mobi/blog/2015/06/16/coding-habits-seven-ineffective-coding-habits-of-many-programmers-short-summary/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<script>
+  $(document).ready(function() {  
+    var stickyNavTop = $('nav').offset().top;  
+      
+    var stickyNav = function(){  
+      var scrollTop = $(window).scrollTop(); 
+      var navHasClassSticky = $('nav').hasClass('sticky');
+
+      if (scrollTop > stickyNavTop && navHasClassSticky) {   
+        return true;
+      } else if (scrollTop > stickyNavTop) {
+        $('nav').hide();
+        $('nav').addClass('sticky');
+        $('nav').fadeIn('2000');
+      } else {  
+        $('nav').removeClass('sticky');   
+      }  
+    };  
+      
+    stickyNav();  
+      
+    $(window).scroll(function() {  
+      stickyNav();  
+    });  
+  });  
+</script>
+
+
+</body>
+</html>

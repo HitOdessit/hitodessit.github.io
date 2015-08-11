@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://android-dev.mobi/sitemap.xml 
