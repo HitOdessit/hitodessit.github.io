@@ -11,7 +11,7 @@ Using [RushORM](http://www.rushorm.com) I’ve found that it is very hard to und
 
 But how to enable debug logging in RushORM? It’s not clear from the documentation, in fact, the documentation doesn’t say a word about this feature. Luckily, this feature exists!
 
-Analyzing source code I found how to enable debug logging in RushORM: you simply need to add following flag to your `AndroidManifest.xml` file, under `<application>` section:
+Analyzing source code I found how to enable debug logging in RushORM: you simply need to add the following flag to your `AndroidManifest.xml` file, under `<application>` section:
 
 <!--more-->
 ```xml
